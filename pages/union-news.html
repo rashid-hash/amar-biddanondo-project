@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ইউনিয়ন সংবাদ ও নোটিশ | আমার বিদ্যানন্দ</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F9D58',
+                        newsBtn: '#1E88E5', /* Blue color for News */
+                        newsLight: '#E3F2FD',
+                    },
+                    fontFamily: {
+                        bengali: ['"Hind Siliguri"', 'sans-serif'],
+                        noto: ['"Noto Sans Bengali"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-bengali bg-gray-50 text-gray-800 antialiased overflow-x-hidden relative min-h-screen flex flex-col">
+    
+    <div class="fixed inset-0 z-[-1] bg-gradient-to-br from-blue-50 via-white to-indigo-50"></div>
+
+    <nav class="glass-header sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <a href="../index.html" class="bg-gray-100 hover:bg-gray-200 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">ইউনিয়ন সংবাদ</h1>
+        </div>
+        <button class="bg-newsBtn text-white px-4 py-2 rounded-full text-sm font-semibold shadow hover:bg-blue-700 transition hidden md:block">
+            + সংবাদ যোগ করুন
+        </button>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        
+        <div class="text-center mb-8">
+            <div class="inline-block p-4 rounded-full bg-newsLight text-newsBtn mb-4 shadow-sm animate-bounce">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H15M9 11l3 3L22 4" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">সর্বশেষ সংবাদ ও নোটিশ</h2>
+            <p class="text-gray-600 font-noto max-w-lg mx-auto">ইউনিয়ন পরিষদের সকল গুরুত্বপূর্ণ ঘোষণা, প্রজ্ঞাপন এবং কার্যক্রমের আপডেট জানুন সবার আগে।</p>
+        </div>
+
+        <div class="glass-card p-4 mb-10 flex flex-wrap justify-center gap-2 md:gap-4 sticky top-20 z-40 shadow-sm">
+            <button class="filter-btn active bg-newsBtn text-white px-5 py-2 rounded-full font-bold shadow-md transition" data-category="all">সব খবর</button>
+            <button class="filter-btn bg-white text-gray-700 hover:bg-blue-50 border border-gray-200 px-5 py-2 rounded-full font-bold transition flex items-center gap-2" data-category="notice"><span>📢</span> সরকারি নোটিশ</button>
+            <button class="filter-btn bg-white text-gray-700 hover:bg-blue-50 border border-gray-200 px-5 py-2 rounded-full font-bold transition flex items-center gap-2" data-category="relief"><span>🌾</span> অনুদান ও ভাতা</button>
+            <button class="filter-btn bg-white text-gray-700 hover:bg-blue-50 border border-gray-200 px-5 py-2 rounded-full font-bold transition flex items-center gap-2" data-category="event"><span>🗓️</span> ইভেন্ট/অনুষ্ঠান</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="newsGrid">
+            
+            <div class="glass-card flex flex-col group overflow-hidden news-card hover:-translate-y-1 transition duration-300 shadow-md" data-category="notice">
+                <div class="relative h-48 bg-gray-200 overflow-hidden">
+                    <div class="absolute inset-0 bg-blue-100 flex items-center justify-center text-5xl opacity-50">🏛️</div>
+                    <div class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm animate-pulse">জরুরি</div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex justify-between items-center mb-3 text-xs font-semibold text-gray-500 font-noto">
+                        <span class="bg-newsLight text-newsBtn px-2 py-1 rounded">সরকারি নোটিশ</span>
+                        <span>১৫ মে, ২০২৬</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 leading-snug group-hover:text-newsBtn transition">বিনামূল্যে স্বাস্থ্যসেবা ও চক্ষু ক্যাম্প</h3>
+                    <p class="text-sm text-gray-600 font-noto mb-4 flex-grow line-clamp-3">
+                        আগামী ২০শে মে ইউনিয়ন পরিষদ প্রাঙ্গণে দিনব্যাপী বিনামূল্যে স্বাস্থ্যসেবা ও চক্ষু ক্যাম্প অনুষ্ঠিত হবে। আগ্রহী সকল নাগরিককে সকাল ৯টার মধ্যে উপস্থিত থাকার জন্য অনুরোধ করা হলো।
+                    </p>
+                    <button class="text-newsBtn font-bold text-left hover:underline flex items-center gap-1 mt-auto">
+                        বিস্তারিত পড়ুন <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="glass-card flex flex-col group overflow-hidden news-card hover:-translate-y-1 transition duration-300 shadow-md" data-category="relief">
+                <div class="relative h-48 bg-gray-200 overflow-hidden">
+                    <div class="absolute inset-0 bg-green-100 flex items-center justify-center text-5xl opacity-50">🌾</div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex justify-between items-center mb-3 text-xs font-semibold text-gray-500 font-noto">
+                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded">অনুদান ও ভাতা</span>
+                        <span>১২ মে, ২০২৬</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 leading-snug group-hover:text-newsBtn transition">বয়স্ক ও বিধবা ভাতার নতুন তালিকা প্রকাশ</h3>
+                    <p class="text-sm text-gray-600 font-noto mb-4 flex-grow line-clamp-3">
+                        ২০২৫-২৬ অর্থবছরের নতুন বয়স্ক ও বিধবা ভাতার চূড়ান্ত তালিকা প্রকাশ করা হয়েছে। তালিকাটি ইউনিয়ন পরিষদের নোটিশ বোর্ড এবং ডিজিটাল সেন্টারে পাওয়া যাচ্ছে।
+                    </p>
+                    <button class="text-newsBtn font-bold text-left hover:underline flex items-center gap-1 mt-auto">
+                        বিস্তারিত পড়ুন <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="glass-card flex flex-col group overflow-hidden news-card hover:-translate-y-1 transition duration-300 shadow-md" data-category="event">
+                <div class="relative h-48 bg-gray-200 overflow-hidden">
+                    <div class="absolute inset-0 bg-purple-100 flex items-center justify-center text-5xl opacity-50">🏆</div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex justify-between items-center mb-3 text-xs font-semibold text-gray-500 font-noto">
+                        <span class="bg-purple-100 text-purple-700 px-2 py-1 rounded">ইভেন্ট/অনুষ্ঠান</span>
+                        <span>১০ মে, ২০২৬</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 leading-snug group-hover:text-newsBtn transition">আন্তঃওয়ার্ড ফুটবল টুর্নামেন্টের ফাইনাল</h3>
+                    <p class="text-sm text-gray-600 font-noto mb-4 flex-grow line-clamp-3">
+                        আগামী শুক্রবার বিকেলে বিদ্যানন্দ হাইস্কুল মাঠে চেয়ারম্যান গোল্ডকাপ ফুটবল টুর্নামেন্টের ফাইনাল খেলা অনুষ্ঠিত হবে। সবাইকে খেলা উপভোগ করার আমন্ত্রণ জানানো হচ্ছে।
+                    </p>
+                    <button class="text-newsBtn font-bold text-left hover:underline flex items-center gap-1 mt-auto">
+                        বিস্তারিত পড়ুন <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="glass-card flex flex-col group overflow-hidden news-card hover:-translate-y-1 transition duration-300 shadow-md" data-category="notice">
+                <div class="relative h-48 bg-gray-200 overflow-hidden">
+                    <div class="absolute inset-0 bg-blue-100 flex items-center justify-center text-5xl opacity-50">💻</div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex justify-between items-center mb-3 text-xs font-semibold text-gray-500 font-noto">
+                        <span class="bg-newsLight text-newsBtn px-2 py-1 rounded">সরকারি নোটিশ</span>
+                        <span>০৫ মে, ২০২৬</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 leading-snug group-hover:text-newsBtn transition">স্মার্ট কার্ড (NID) বিতরণের সময়সূচী</h3>
+                    <p class="text-sm text-gray-600 font-noto mb-4 flex-grow line-clamp-3">
+                        যাঁরা নতুন ভোটার হয়েছেন এবং এখনো স্মার্ট কার্ড গ্রহণ করেননি, তাঁরা আগামী সপ্তাহের সোম ও মঙ্গলবার ডিজিটাল সেন্টার থেকে নিজেদের স্মার্ট কার্ড সংগ্রহ করতে পারবেন।
+                    </p>
+                    <button class="text-newsBtn font-bold text-left hover:underline flex items-center gap-1 mt-auto">
+                        বিস্তারিত পড়ুন <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="glass-card flex flex-col group overflow-hidden news-card hover:-translate-y-1 transition duration-300 shadow-md" data-category="relief">
+                <div class="relative h-48 bg-gray-200 overflow-hidden">
+                    <div class="absolute inset-0 bg-green-100 flex items-center justify-center text-5xl opacity-50">🌱</div>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex justify-between items-center mb-3 text-xs font-semibold text-gray-500 font-noto">
+                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded">অনুদান ও ভাতা</span>
+                        <span>০১ মে, ২০২৬</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3 leading-snug group-hover:text-newsBtn transition">কৃষকদের মাঝে বিনামূল্যে সার ও বীজ বিতরণ</h3>
+                    <p class="text-sm text-gray-600 font-noto mb-4 flex-grow line-clamp-3">
+                        ক্ষুদ্র ও প্রান্তিক কৃষকদের রবি মৌসুমের ফসলের আবাদ বৃদ্ধির লক্ষ্যে সরকারি প্রণোদনার আওতায় সার ও বীজ বিতরণ কর্মসূচির উদ্বোধন করা হয়েছে।
+                    </p>
+                    <button class="text-newsBtn font-bold text-left hover:underline flex items-center gap-1 mt-auto">
+                        বিস্তারিত পড়ুন <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const newsCards = document.querySelectorAll('.news-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update Active Button Style
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-newsBtn', 'text-white', 'active');
+                        b.classList.add('bg-white', 'text-gray-700');
+                    });
+                    btn.classList.remove('bg-white', 'text-gray-700');
+                    btn.classList.add('bg-newsBtn', 'text-white', 'active');
+
+                    // Filter Cards
+                    const category = btn.getAttribute('data-category');
+                    
+                    newsCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

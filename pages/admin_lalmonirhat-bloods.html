@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সিকিউর এডমিন প্যানেল - Blood Donation Society of Lalmonirhat 💕</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap');
+        body { font-family: 'Noto Sans Bengali', sans-serif; background-color: #f3f4f6; }
+        .bg-blood { background-color: #dc2626; }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+</head>
+<body class="p-4 md:p-6">
+
+    <div id="loginSection" class="max-w-md mx-auto bg-white rounded-2xl shadow-md overflow-hidden mt-10">
+        <div class="bg-blood text-white p-6 text-center">
+            <h2 class="text-2xl font-bold">🔒 Admin Login (Blood Donation Society of Lalmonirhat 💕) </h2>
+            <p class="text-sm opacity-90 mt-1">শুধুমাত্র অনুমোদিত ব্যক্তিদের জন্য</p>
+        </div>
+        <form id="loginForm" class="p-8 space-y-5">
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">ইমেইল</label>
+                <input type="email" id="loginEmail" required placeholder="admin@dharla.com" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">পাসওয়ার্ড</label>
+                <input type="password" id="loginPassword" required placeholder="********" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-red-500">
+            </div>
+            <button type="submit" id="loginBtn" class="w-full bg-blood text-white font-bold py-3.5 rounded-xl hover:bg-red-700 transition shadow-md">
+                লগইন করুন
+            </button>
+            <p id="loginError" class="text-red-500 text-sm text-center hidden mt-2">ইমেইল বা পাসওয়ার্ড ভুল হয়েছে!</p>
+        </form>
+    </div>
+
+
+    <div id="adminSection" class="hidden max-w-4xl mx-auto space-y-6">
+        
+        <div class="bg-white rounded-2xl shadow-sm p-4 flex justify-between items-center border border-gray-100">
+            <h2 class="text-xl font-bold text-gray-800">🩸 ডোনার ম্যানেজমেন্ট</h2>
+            <button onclick="logoutAdmin()" class="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl text-sm font-bold hover:bg-red-100 hover:text-red-600 transition">
+                লগআউট (Logout)
+            </button>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+            <div class="bg-gray-50 border-b border-gray-100 px-6 py-4">
+                <h3 class="font-bold text-gray-700 text-lg">➕ নতুন ডোনার যুক্ত করুন</h3>
+            </div>
+            <form id="donorForm" class="p-6 space-y-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">রক্তদাতার নাম *</label>
+                        <input type="text" id="name" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">রক্তের গ্রুপ *</label>
+                        <select id="bloodGroup" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-400">
+                            <option value="">নির্বাচন করুন</option>
+                            <option value="A+">A+</option><option value="A-">A-</option>
+                            <option value="B+">B+</option><option value="B-">B-</option>
+                            <option value="O+">O+</option><option value="O-">O-</option>
+                            <option value="AB+">AB+</option><option value="AB-">AB-</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">ঠিকানা / এলাকা *</label>
+                        <input type="text" id="location" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">কলিং নাম্বার *</label>
+                        <input type="tel" id="phone" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">হোয়াটসঅ্যাপ *</label>
+                        <input type="tel" id="whatsapp" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">মোট ডোনেট (বার) *</label>
+                        <input type="text" id="totalDonate" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">সর্বশেষ রক্তদান *</label>
+                        <input type="text" id="lastDonate" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-400">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">ফেসবুক লিংক *</label>
+                        <input type="url" id="fbLink" required class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-400">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">প্রোফাইল ছবির লিংক *</label>
+                        <input type="url" id="profileImage" class="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-red-400">
+                    </div>
+                </div>
+                <button type="submit" id="submitBtn" class="w-full bg-blood text-white font-bold py-3 rounded-lg hover:bg-red-700 transition">
+                    সেভ করুন
+                </button>
+            </form>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+            <div class="bg-gray-50 border-b border-gray-100 px-6 py-4 flex justify-between items-center">
+                <h3 class="font-bold text-gray-700 text-lg">📋 বর্তমান ডোনার তালিকা</h3>
+            </div>
+            <div class="p-0 overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50 text-gray-500 text-xs uppercase border-b border-gray-100">
+                            <th class="px-6 py-3 font-semibold">নাম</th>
+                            <th class="px-6 py-3 font-semibold">গ্রুপ</th>
+                            <th class="px-6 py-3 font-semibold">নাম্বার</th>
+                            <th class="px-6 py-3 font-semibold text-center">অ্যাকশন</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminDonorList" class="text-sm text-gray-700">
+                        <tr><td colspan="4" class="text-center py-4 text-gray-400">লোড হচ্ছে...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="editModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50 backdrop-blur-sm">
+        <div class="bg-white rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="bg-gray-100 border-b border-gray-200 px-6 py-4 flex justify-between items-center">
+                <h3 class="font-bold text-gray-800 text-lg">✏️ তথ্য সংশোধন (Edit Donor)</h3>
+                <button onclick="closeEditModal()" class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+            </div>
+            <form id="editForm" class="p-6 space-y-5">
+                <input type="hidden" id="editKey">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">রক্তদাতার নাম *</label>
+                        <input type="text" id="editName" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">রক্তের গ্রুপ *</label>
+                        <select id="editBloodGroup" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+                            <option value="A+">A+</option><option value="A-">A-</option>
+                            <option value="B+">B+</option><option value="B-">B-</option>
+                            <option value="O+">O+</option><option value="O-">O-</option>
+                            <option value="AB+">AB+</option><option value="AB-">AB-</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">ঠিকানা / এলাকা *</label>
+                        <input type="text" id="editLocation" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">কলিং নাম্বার *</label>
+                        <input type="tel" id="editPhone" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">হোয়াটসঅ্যাপ *</label>
+                        <input type="tel" id="editWhatsapp" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">মোট ডোনেট (বার) *</label>
+                        <input type="text" id="editTotalDonate" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">সর্বশেষ রক্তদান *</label>
+                        <input type="text" id="editLastDonate" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">ফেসবুক লিংক *</label>
+                        <input type="url" id="editFbLink" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-semibold text-gray-600 mb-1">প্রোফাইল ছবির লিংক *</label>
+                        <input type="url" id="editProfileImage" required class="w-full px-3 py-2 rounded-lg border border-gray-300">
+                    </div>
+                </div>
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closeEditModal()" class="w-1/2 bg-gray-200 text-gray-700 font-bold py-2.5 rounded-lg hover:bg-gray-300 transition">বাতিল</button>
+                    <button type="submit" id="updateBtn" class="w-1/2 bg-emerald-600 text-white font-bold py-2.5 rounded-lg hover:bg-emerald-700 transition">আপডেট করুন</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. Firebase Config
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyCOAQ4neajNgwUDUHl_9w08iN9J_qpkjfM",
+  authDomain: "lalmonirhat-blood-doners.firebaseapp.com",
+  projectId: "lalmonirhat-blood-doners",
+  storageBucket: "lalmonirhat-blood-doners.firebasestorage.app",
+  messagingSenderId: "74497582566",
+  appId: "1:74497582566:web:82d3f786dc5e955a1ea227"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.database();
+
+        // ==========================================
+        // 2. Authentication Logic
+        // ==========================================
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('adminSection').classList.remove('hidden');
+                loadDonorsInAdmin();
+            } else {
+                document.getElementById('loginSection').classList.remove('hidden');
+                document.getElementById('adminSection').classList.add('hidden');
+            }
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const pass = document.getElementById('loginPassword').value;
+            const btn = document.getElementById('loginBtn');
+            const err = document.getElementById('loginError');
+            
+            btn.innerHTML = 'অপেক্ষা করুন...';
+            err.classList.add('hidden');
+
+            auth.signInWithEmailAndPassword(email, pass)
+                .then(() => {
+                    btn.innerHTML = 'লগইন করুন';
+                    document.getElementById('loginForm').reset();
+                })
+                .catch(() => {
+                    btn.innerHTML = 'লগইন করুন';
+                    err.classList.remove('hidden');
+                });
+        });
+
+        function logoutAdmin() { auth.signOut(); }
+
+        // ==========================================
+        // 3. Add Donor Logic
+        // ==========================================
+        document.getElementById('donorForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = 'সেভ হচ্ছে...';
+
+            const donorData = {
+                name: document.getElementById('name').value,
+                bloodGroup: document.getElementById('bloodGroup').value,
+                location: document.getElementById('location').value,
+                phone: document.getElementById('phone').value,
+                whatsapp: document.getElementById('whatsapp').value || document.getElementById('phone').value,
+                totalDonate: document.getElementById('totalDonate').value,
+                lastDonate: document.getElementById('lastDonate').value,
+                fbLink: document.getElementById('fbLink').value || '#',
+                profileImage: document.getElementById('profileImage').value || ''
+            };
+
+            db.ref('donors').push(donorData)
+            .then(() => {
+                alert('ডোনার সফলভাবে যুক্ত করা হয়েছে!');
+                document.getElementById('donorForm').reset();
+                btn.innerHTML = 'সেভ করুন';
+            })
+            .catch((error) => {
+                alert('সমস্যা হয়েছে: ' + error.message);
+                btn.innerHTML = 'সেভ করুন';
+            });
+        });
+
+        // ==========================================
+        // 4. Load, Edit & Delete Donor Logic
+        // ==========================================
+        function loadDonorsInAdmin() {
+            const listBody = document.getElementById('adminDonorList');
+            
+            db.ref('donors').on('value', (snapshot) => {
+                listBody.innerHTML = '';
+                if (!snapshot.exists()) {
+                    listBody.innerHTML = '<tr><td colspan="4" class="text-center py-4 text-gray-400">কোনো ডোনার নেই</td></tr>';
+                    return;
+                }
+
+                snapshot.forEach((child) => {
+                    const key = child.key;
+                    const data = child.val();
+                    
+                    const row = `
+                        <tr class="border-b border-gray-50 hover:bg-gray-50/50 transition">
+                            <td class="px-6 py-4 font-semibold">${data.name}</td>
+                            <td class="px-6 py-4"><span class="bg-red-100 text-red-600 px-2 py-0.5 rounded text-xs font-bold">${data.bloodGroup}</span></td>
+                            <td class="px-6 py-4">${data.phone}</td>
+                            <td class="px-6 py-4 text-center flex justify-center gap-2">
+                                <button onclick="openEditModal('${key}')" class="bg-emerald-50 text-emerald-600 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-emerald-600 hover:text-white transition shadow-sm border border-emerald-100">
+                                    এডিট
+                                </button>
+                                <button onclick="deleteDonor('${key}', '${data.name}')" class="bg-red-50 text-red-600 px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-red-500 hover:text-white transition shadow-sm border border-red-100">
+                                    ডিলিট
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                    listBody.innerHTML += row;
+                });
+            });
+        }
+
+        // Open Edit Modal with Pre-filled Data
+        function openEditModal(key) {
+            db.ref('donors/' + key).once('value', (snapshot) => {
+                if(snapshot.exists()) {
+                    const data = snapshot.val();
+                    document.getElementById('editKey').value = key;
+                    document.getElementById('editName').value = data.name;
+                    document.getElementById('editBloodGroup').value = data.bloodGroup;
+                    document.getElementById('editLocation').value = data.location;
+                    document.getElementById('editPhone').value = data.phone;
+                    document.getElementById('editWhatsapp').value = data.whatsapp || '';
+                    document.getElementById('editTotalDonate').value = data.totalDonate;
+                    document.getElementById('editLastDonate').value = data.lastDonate;
+                    document.getElementById('editFbLink').value = data.fbLink === '#' ? '' : data.fbLink;
+                    document.getElementById('editProfileImage').value = data.profileImage || '';
+                    
+                    document.getElementById('editModal').style.display = 'flex';
+                }
+            });
+        }
+
+        function closeEditModal() { document.getElementById('editModal').style.display = 'none'; }
+
+        // Update Form Submit
+        document.getElementById('editForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const key = document.getElementById('editKey').value;
+            const btn = document.getElementById('updateBtn');
+            btn.innerHTML = 'আপডেট হচ্ছে...';
+
+            const updatedData = {
+                name: document.getElementById('editName').value,
+                bloodGroup: document.getElementById('editBloodGroup').value,
+                location: document.getElementById('editLocation').value,
+                phone: document.getElementById('editPhone').value,
+                whatsapp: document.getElementById('editWhatsapp').value || document.getElementById('editPhone').value,
+                totalDonate: document.getElementById('editTotalDonate').value,
+                lastDonate: document.getElementById('editLastDonate').value,
+                fbLink: document.getElementById('editFbLink').value || '#',
+                profileImage: document.getElementById('editProfileImage').value || ''
+            };
+
+            db.ref('donors/' + key).update(updatedData)
+            .then(() => {
+                alert('তথ্য সফলভাবে আপডেট করা হয়েছে!');
+                closeEditModal();
+                btn.innerHTML = 'আপডেট করুন';
+            })
+            .catch((error) => {
+                alert('আপডেট করতে সমস্যা হয়েছে: ' + error.message);
+                btn.innerHTML = 'আপডেট করুন';
+            });
+        });
+
+        // Delete Function
+        function deleteDonor(key, name) {
+            if (confirm(`আপনি কি নিশ্চিত যে "${name}" কে মুছে ফেলতে চান?`)) {
+                db.ref('donors/' + key).remove().catch((error) => {
+                    alert('ডিলিট করতে সমস্যা হয়েছে: ' + error.message);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

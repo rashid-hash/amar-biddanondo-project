@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>অভিযোগ ও পরামর্শ | আমার বিদ্যানন্দ</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F9D58',
+                        warnBtn: '#F59E0B', /* Amber/Yellow for complaints */
+                        warnLight: '#FEF3C7',
+                    },
+                    fontFamily: {
+                        bengali: ['"Hind Siliguri"', 'sans-serif'],
+                        noto: ['"Noto Sans Bengali"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-bengali bg-gray-50 text-gray-800 antialiased overflow-x-hidden relative min-h-screen flex flex-col">
+    
+    <div class="fixed inset-0 z-[-1] bg-gradient-to-br from-yellow-50 via-white to-orange-50"></div>
+
+    <nav class="glass-header sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <a href="../index.html" class="bg-gray-100 hover:bg-gray-200 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">অভিযোগ কেন্দ্র</h1>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        
+        <div class="text-center mb-10">
+            <div class="inline-block p-4 rounded-full bg-warnLight text-warnBtn mb-4 shadow-sm animate-pulse">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">আপনার অভিযোগ জানান</h2>
+            <p class="text-gray-600 font-noto max-w-lg mx-auto">ইউনিয়নের যেকোনো সমস্যা, দুর্নীতি বা নাগরিক সেবার মান নিয়ে আপনার অভিযোগ বা মতামত আমাদের জানান।</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="lg:col-span-2">
+                <div class="glass-card p-6 md:p-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-warnBtn pl-3">নতুন অভিযোগ দাখিল করুন</h3>
+                    
+                    <form id="complaintForm" onsubmit="submitComplaint(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2 text-sm">আপনার নাম <span class="text-red-500">*</span></label>
+                                <input type="text" required placeholder="সম্পূর্ণ নাম লিখুন" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-warnBtn focus:border-transparent transition bg-white/50 backdrop-blur-sm font-noto">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2 text-sm">মোবাইল নম্বর <span class="text-red-500">*</span></label>
+                                <input type="tel" required placeholder="017XXXXXXXX" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-warnBtn focus:border-transparent transition bg-white/50 backdrop-blur-sm font-noto">
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2 text-sm">অভিযোগের ধরন <span class="text-red-500">*</span></label>
+                                <select required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-warnBtn focus:border-transparent transition bg-white/50 backdrop-blur-sm font-noto">
+                                    <option value="" disabled selected>নির্বাচন করুন</option>
+                                    <option>রাস্তাঘাট ও ব্রিজ সমস্যা</option>
+                                    <option>নাগরিক সনদ পেতে হয়রানি</option>
+                                    <option>ভাতা ও অনুদান অনিয়ম</option>
+                                    <option>বিদ্যুৎ ও পানি সমস্যা</option>
+                                    <option>অন্যান্য</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2 text-sm">ওয়ার্ড নম্বর <span class="text-red-500">*</span></label>
+                                <select required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-warnBtn focus:border-transparent transition bg-white/50 backdrop-blur-sm font-noto">
+                                    <option value="" disabled selected>ওয়ার্ড নির্বাচন করুন</option>
+                                    <option>ওয়ার্ড ১</option>
+                                    <option>ওয়ার্ড ২</option>
+                                    <option>ওয়ার্ড ৩</option>
+                                    <option>ওয়ার্ড ৪</option>
+                                    <option>ওয়ার্ড ৫</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-semibold mb-2 text-sm">বিস্তারিত বিবরণ <span class="text-red-500">*</span></label>
+                            <textarea required rows="4" placeholder="আপনার সমস্যার কথা বিস্তারিতভাবে লিখুন..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-warnBtn focus:border-transparent transition bg-white/50 backdrop-blur-sm font-noto resize-none"></textarea>
+                        </div>
+
+                        <div class="mb-8">
+                            <label class="block text-gray-700 font-semibold mb-2 text-sm">প্রমাণস্বরূপ ছবি (যদি থাকে)</label>
+                            <div class="flex items-center justify-center w-full">
+                                <label class="flex flex-col items-center justify-center w-full h-32 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer bg-white/50 hover:bg-gray-50 transition">
+                                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                        <svg class="w-8 h-8 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                                        <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">ক্লিক করুন</span> অথবা ছবিটি এখানে ড্র্যাগ করুন</p>
+                                        <p class="text-xs text-gray-500">PNG, JPG (সর্বোচ্চ 5MB)</p>
+                                    </div>
+                                    <input type="file" class="hidden" accept="image/*" />
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-warnBtn text-white font-bold text-lg py-3 rounded-xl shadow-lg hover:bg-yellow-600 hover:-translate-y-1 transition transform duration-300">
+                            অভিযোগ জমা দিন
+                        </button>
+                    </form>
+
+                    <div id="successMsg" class="hidden mt-6 bg-green-50 border border-green-200 p-6 rounded-xl text-center">
+                        <div class="text-4xl mb-2 text-green-500">✅</div>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">অভিযোগ সফলভাবে জমা হয়েছে!</h4>
+                        <p class="text-gray-600 font-noto text-sm mb-4">আপনার অভিযোগটি চেয়ারম্যান ও সংশ্লিষ্ট কর্তৃপক্ষের কাছে পাঠানো হয়েছে। অভিযোগের অবস্থা জানতে নিচের আইডিটি সংরক্ষণ করুন:</p>
+                        <div class="inline-block bg-white px-6 py-2 rounded-lg border-2 border-dashed border-green-400 text-2xl font-bold text-green-700 tracking-widest" id="trackingIdDisplay">
+                            AB-1234
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                
+                <div class="glass-card p-6 bg-gradient-to-br from-yellow-50 to-white">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-l-4 border-primary pl-2">অভিযোগের অবস্থা জানুন</h3>
+                    <p class="text-xs text-gray-500 mb-4 font-noto">আপনাকে দেওয়া ট্র্যাকিং আইডিটি এখানে লিখে সার্চ করুন।</p>
+                    <form onsubmit="event.preventDefault(); alert('আপনার অভিযোগটি বর্তমানে প্রক্রিয়াধীন (In Progress) আছে।');">
+                        <div class="mb-4 relative">
+                            <input type="text" required placeholder="যেমন: AB-1234" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-warnBtn font-bold uppercase tracking-wider text-center text-gray-700">
+                        </div>
+                        <button type="submit" class="w-full bg-gray-800 text-white font-bold py-3 rounded-xl shadow hover:bg-gray-900 transition flex justify-center items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg> সার্চ করুন
+                        </button>
+                    </form>
+                </div>
+
+                <div class="glass-card p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-l-4 border-accent pl-2">সাম্প্রতিক সমাধান</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="p-3 bg-white/60 rounded-lg border border-gray-100">
+                            <div class="flex justify-between items-start mb-1">
+                                <span class="text-xs font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded">সমাধান হয়েছে</span>
+                                <span class="text-xs text-gray-400">২ দিন আগে</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-gray-700 mb-1">ওয়ার্ড ৩ এর রাস্তার কালভার্ট মেরামত</h4>
+                            <p class="text-xs text-gray-500 font-noto">কালভার্ট ভাঙার অভিযোগ পাওয়ার পর দ্রুততম সময়ে মেরামত করা হয়েছে।</p>
+                        </div>
+                        
+                        <div class="p-3 bg-white/60 rounded-lg border border-gray-100">
+                            <div class="flex justify-between items-start mb-1">
+                                <span class="text-xs font-bold bg-blue-100 text-blue-700 px-2 py-0.5 rounded">কাজ চলছে</span>
+                                <span class="text-xs text-gray-400">৫ দিন আগে</span>
+                            </div>
+                            <h4 class="text-sm font-bold text-gray-700 mb-1">বাজারের টিউবওয়েল অকেজো</h4>
+                            <p class="text-xs text-gray-500 font-noto">নতুন টিউবওয়েল স্থাপনের জন্য টেন্ডার পাশ হয়েছে।</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function submitComplaint(event) {
+            event.preventDefault(); // Prevent page reload
+            
+            // Generate a random 4 digit tracking ID
+            const randomId = Math.floor(1000 + Math.random() * 9000);
+            const trackingId = `AB-${randomId}`;
+            
+            // Hide the form and show the success message
+            document.getElementById('complaintForm').style.display = 'none';
+            document.getElementById('trackingIdDisplay').innerText = trackingId;
+            
+            const successMsg = document.getElementById('successMsg');
+            successMsg.classList.remove('hidden');
+            successMsg.classList.add('animate-pulse');
+            setTimeout(() => {
+                successMsg.classList.remove('animate-pulse');
+            }, 500);
+        }
+    </script>
+</body>
+</html>

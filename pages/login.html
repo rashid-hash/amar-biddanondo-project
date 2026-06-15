@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>লগইন | আমার বিদ্যানন্দ</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F9D58',
+                        primaryDark: '#0b7a44',
+                    },
+                    fontFamily: {
+                        bengali: ['"Hind Siliguri"', 'sans-serif'],
+                        noto: ['"Noto Sans Bengali"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-bengali bg-gray-50 text-gray-800 antialiased min-h-screen flex items-center justify-center relative overflow-hidden">
+    
+    <div class="fixed inset-0 z-[-1] bg-gradient-to-br from-green-100 via-teal-50 to-white"></div>
+    
+    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-primary opacity-10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-teal-400 opacity-10 rounded-full blur-3xl"></div>
+
+    <div class="container mx-auto px-4 py-8 flex justify-center z-10">
+        
+        <div class="glass-card w-full max-w-md p-6 md:p-8 relative overflow-hidden">
+            
+            <a href="../index.html" class="absolute top-4 left-4 text-gray-500 hover:text-primary transition bg-gray-100 hover:bg-green-50 p-2 rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </a>
+
+            <div class="text-center mt-6 mb-6">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-tr from-primary to-teal-400 text-white rounded-2xl shadow-lg mb-3 transform rotate-3">
+                    <span class="text-2xl font-bold -rotate-3">আবি</span>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800">আমার বিদ্যানন্দ</h2>
+                <p class="text-sm text-gray-500 font-noto">ডিজিটাল সেবায় স্বাগতম</p>
+            </div>
+
+            <div class="flex bg-gray-100/80 p-1 rounded-xl mb-6 relative z-10 backdrop-blur-sm">
+                <button id="loginTabBtn" onclick="switchTab('login')" class="flex-1 py-2 rounded-lg font-bold text-sm transition-all duration-300 bg-white text-primary shadow-sm">লগইন</button>
+                <button id="regTabBtn" onclick="switchTab('register')" class="flex-1 py-2 rounded-lg font-bold text-sm transition-all duration-300 text-gray-500 hover:text-gray-700">নতুন অ্যাকাউন্ট</button>
+            </div>
+
+            <div class="relative">
+                
+                <form id="loginForm" class="space-y-5 transition-all duration-300" onsubmit="event.preventDefault(); alert('লগইন ফাংশনালিটি ফায়ারবেস দিয়ে তৈরি করতে হবে।');">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">মোবাইল নম্বর</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">📞</span>
+                            <input type="tel" required placeholder="017XXXXXXXX" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition bg-white/60 font-noto">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="flex justify-between items-center mb-1.5">
+                            <label class="block text-sm font-semibold text-gray-700">পাসওয়ার্ড</label>
+                            <a href="#" class="text-xs text-primary font-semibold hover:underline">ভুলে গেছেন?</a>
+                        </div>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">🔒</span>
+                            <input type="password" required placeholder="••••••••" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition bg-white/60 font-noto">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary text-white font-bold text-lg py-3 rounded-xl shadow-lg hover:bg-primaryDark transition transform hover:-translate-y-0.5 duration-300">
+                        প্রবেশ করুন
+                    </button>
+                </form>
+
+                <form id="registerForm" class="space-y-4 transition-all duration-300 hidden opacity-0" onsubmit="event.preventDefault(); alert('রেজিস্ট্রেশন ফাংশনালিটি ফায়ারবেস দিয়ে তৈরি করতে হবে।');">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">সম্পূর্ণ নাম</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">👤</span>
+                            <input type="text" required placeholder="আপনার নাম লিখুন" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition bg-white/60 font-noto text-sm">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">মোবাইল নম্বর</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">📞</span>
+                            <input type="tel" required placeholder="017XXXXXXXX" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition bg-white/60 font-noto text-sm">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1.5">পাসওয়ার্ড নির্ধারণ করুন</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400">🔒</span>
+                            <input type="password" required placeholder="অন্তত ৬ অক্ষরের পাসওয়ার্ড" class="w-full pl-10 pr-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition bg-white/60 font-noto text-sm">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full bg-teal-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg hover:bg-teal-700 transition transform hover:-translate-y-0.5 duration-300 mt-2">
+                        অ্যাকাউন্ট তৈরি করুন
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            const loginTabBtn = document.getElementById('loginTabBtn');
+            const regTabBtn = document.getElementById('regTabBtn');
+
+            if (tab === 'login') {
+                // Show Login, Hide Register
+                registerForm.classList.add('hidden', 'opacity-0');
+                loginForm.classList.remove('hidden');
+                // Small delay to allow display:block to apply before opacity transition
+                setTimeout(() => loginForm.classList.remove('opacity-0'), 10);
+                
+                // Update Button Styles
+                loginTabBtn.classList.add('bg-white', 'text-primary', 'shadow-sm');
+                loginTabBtn.classList.remove('text-gray-500');
+                
+                regTabBtn.classList.remove('bg-white', 'text-primary', 'shadow-sm');
+                regTabBtn.classList.add('text-gray-500');
+            } else {
+                // Show Register, Hide Login
+                loginForm.classList.add('hidden', 'opacity-0');
+                registerForm.classList.remove('hidden');
+                setTimeout(() => registerForm.classList.remove('opacity-0'), 10);
+                
+                // Update Button Styles
+                regTabBtn.classList.add('bg-white', 'text-primary', 'shadow-sm');
+                regTabBtn.classList.remove('text-gray-500');
+                
+                loginTabBtn.classList.remove('bg-white', 'text-primary', 'shadow-sm');
+                loginTabBtn.classList.add('text-gray-500');
+            }
+        }
+    </script>
+        <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <script>
+            <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <script>
+        // আপনার আসল ফায়ারবেস কনফিগারেশন
+        const firebaseConfig = {
+            apiKey: "AIzaSyBA2Z9PUDvL4XH5jA8W4tcN9FGZ8xnrObo",
+            authDomain: "amar-bidyananda-8b813.firebaseapp.com",
+            databaseURL: "https://amar-bidyananda-8b813-default-rtdb.firebaseio.com",
+            projectId: "amar-bidyananda-8b813",
+            storageBucket: "amar-bidyananda-8b813.firebasestorage.app",
+            messagingSenderId: "709037583767",
+            appId: "1:709037583767:web:4f89df7691fc65ed97e8d2",
+            measurementId: "G-5J9CX3WNK4"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // অ্যাকাউন্ট তৈরি বা রেজিস্ট্রেশন লজিক
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = e.target.querySelector('input[type="text"]').value;
+            const phone = e.target.querySelector('input[type="tel"]').value;
+            const password = e.target.querySelector('input[type="password"]').value;
+
+            if(password.length < 6) {
+                alert("পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে!");
+                return;
+            }
+
+            // মোবাইল নম্বরটিকে ভার্চুয়াল ইমেইলে রূপান্তর
+            const email = phone + "@bidyananda.com";
+
+            // ফায়ারবেসে ইউজার তৈরি করা
+            auth.createUserWithEmailAndPassword(email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    
+                    // ইউজারের নাম ডাটাবেজে (Firestore) সেভ করা
+                    return db.collection("users").doc(user.uid).set({
+                        name: name,
+                        phone: phone,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                })
+                .then(() => {
+                    alert("অ্যাকাউন্ট তৈরি সফল হয়েছে!");
+                    window.location.href = "../index.html"; // হোমপেজে নিয়ে যাবে
+                })
+                .catch((error) => {
+                    alert("ভুল হয়েছে: " + error.message);
+                });
+        });
+
+        // লগইন লজিক
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const phone = e.target.querySelector('input[type="tel"]').value;
+            const password = e.target.querySelector('input[type="password"]').value;
+            
+            const email = phone + "@bidyananda.com";
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    alert("লগইন সফল হয়েছে!");
+                    window.location.href = "../index.html";
+                })
+                .catch((error) => {
+                    alert("মোবাইল নম্বর বা পাসওয়ার্ড ভুল হয়েছে!");
+                });
+        });
+    </script>
+
+    </script>
+
+</body>
+</html>

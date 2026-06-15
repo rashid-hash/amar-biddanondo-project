@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রক্তদাতা রেজিস্ট্রেশন | আমার বিদ্যানন্দ</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F9D58',
+                        blood: '#E53935',
+                        bloodLight: '#FFEBEE',
+                    },
+                    fontFamily: {
+                        bengali: ['"Hind Siliguri"', 'sans-serif'],
+                        noto: ['"Noto Sans Bengali"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-bengali bg-gray-50 text-gray-800 antialiased overflow-x-hidden relative min-h-screen flex flex-col">
+    
+    <div class="fixed inset-0 z-[-1] bg-gradient-to-br from-red-50 via-white to-red-50"></div>
+
+    <nav class="glass-header sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <a href="blood-donors.html" class="bg-gray-100 hover:bg-gray-200 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">রক্তদাতা নিবন্ধন</h1>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 flex-grow flex justify-center">
+        
+        <div class="w-full max-w-3xl">
+            <div class="text-center mb-8">
+                <div class="inline-block p-4 rounded-full bg-bloodLight text-blood mb-4 shadow-sm">
+                    <span class="text-4xl">🩸</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">স্বেচ্ছায় রক্তদাতা হোন</h2>
+                <p class="text-gray-600 font-noto">আপনার এক ব্যাগ রক্ত বাঁচাতে পারে একটি মুমূর্ষু প্রাণ। সঠিক তথ্য দিয়ে ফর্মটি পূরণ করুন।</p>
+            </div>
+
+            <div class="glass-card p-6 md:p-10">
+                <form id="donorForm" onsubmit="submitDonorForm(event)">
+                    
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">ব্যক্তিগত তথ্য</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2 text-sm">সম্পূর্ণ নাম <span class="text-red-500">*</span></label>
+                            <input type="text" required placeholder="আপনার নাম লিখুন" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blood focus:border-transparent transition bg-white/50 font-noto">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2 text-sm">মোবাইল নম্বর <span class="text-red-500">*</span></label>
+                            <input type="tel" required placeholder="017XXXXXXXX" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blood focus:border-transparent transition bg-white/50 font-noto">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2 text-sm">পিতার নাম</label>
+                            <input type="text" placeholder="পিতার নাম লিখুন" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blood focus:border-transparent transition bg-white/50 font-noto">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2 text-sm">মাতার নাম</label>
+                            <input type="text" placeholder="মাতার নাম লিখুন" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blood focus:border-transparent transition bg-white/50 font-noto">
+                        </div>
+                    </div>
+
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">স্বাস্থ্য ও রক্তের তথ্য</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2 text-sm">রক্তের গ্রুপ <span class="text-red-500">*</span></label>
+                            <select required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blood focus:border-transparent transition bg-white/50 font-noto font-bold text-blood">
+                                <option value="" disabled selected>নির্বাচন করুন</option>
+                                <option>A+ (এ পজিটিভ)</option>
+                                <option>A- (এ নেগেটিভ)</option>
+                                <option>B+ (বি পজিটিভ)</option>
+                                <option>B- (বি নেগেটিভ)</option>
+                                <option>O+ (ও পজিটিভ)</option>
+                                <option>O- (ও নেগেটিভ)</option>
+                                <option>AB+ (এবি পজিটিভ)</option>
+                                <option>AB- (এবি নেগেটিভ)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2 text-sm">বয়স <span class="text-red-500">*</span></label>
+                            <input type="number" required min="18" placeholder="যেমন: 25" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blood focus:border-transparent transition bg-white/50 font-noto">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2 text-sm">ওজন (কেজি) <span class="text-red-500">*</span></label>
+                            <input type="number" required min="50" placeholder="যেমন: 60" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blood focus:border-transparent transition bg-white/50 font-noto">
+                        </div>
+                    </div>
+
+                    <div class="mb-8">
+                        <label class="block text-gray-700 font-semibold mb-2 text-sm">বর্তমান ঠিকানা (গ্রাম/ওয়ার্ড) <span class="text-red-500">*</span></label>
+                        <input type="text" required placeholder="যেমন: ওয়ার্ড নং ৩, বিদ্যানন্দ বাজার" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blood focus:border-transparent transition bg-white/50 font-noto">
+                    </div>
+
+                    <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">রক্তদানের ইতিহাস</h3>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-3 text-sm">আপনি কি এর আগে কখনো রক্ত দিয়েছেন? <span class="text-red-500">*</span></label>
+                        <div class="flex gap-6">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="donatedBefore" value="yes" class="w-5 h-5 text-blood focus:ring-blood" onchange="toggleDonationHistory(true)">
+                                <span class="text-gray-700">হ্যাঁ, দিয়েছি</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="radio" name="donatedBefore" value="no" class="w-5 h-5 text-blood focus:ring-blood" onchange="toggleDonationHistory(false)" checked>
+                                <span class="text-gray-700">না, এটাই প্রথমবার</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="historyDetails" class="hidden grid grid-cols-1 md:grid-cols-2 gap-5 mb-8 bg-bloodLight/50 p-4 rounded-xl border border-red-100">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2 text-sm">কতবার রক্ত দিয়েছেন?</label>
+                            <input type="number" id="timesDonated" min="1" placeholder="যেমন: 2" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blood focus:border-transparent transition bg-white/50 font-noto">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2 text-sm">সর্বশেষ রক্তদানের তারিখ</label>
+                            <input type="date" id="lastDonation" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blood focus:border-transparent transition bg-white/50 font-noto">
+                        </div>
+                    </div>
+
+                    <div class="mb-8 flex items-start gap-3">
+                        <input type="checkbox" required id="consent" class="mt-1 w-5 h-5 text-blood focus:ring-blood rounded border-gray-300 cursor-pointer">
+                        <label for="consent" class="text-sm text-gray-600 font-noto cursor-pointer">
+                            আমি স্বেচ্ছায় রক্তদাতা তালিকায় আমার নাম ও মোবাইল নম্বর যুক্ত করতে সম্মত হচ্ছি এবং জরুরি প্রয়োজনে রক্তদানে প্রস্তুত থাকবো।
+                        </label>
+                    </div>
+
+                    <button type="submit" class="w-full bg-blood text-white font-bold text-lg py-3.5 rounded-xl shadow-lg hover:bg-red-700 hover:-translate-y-1 transition transform duration-300">
+                        নিবন্ধন সম্পন্ন করুন
+                    </button>
+                </form>
+
+                <div id="successMsg" class="hidden text-center py-10">
+                    <div class="text-6xl mb-4 text-green-500 animate-bounce">🎉</div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">অভিনন্দন!</h3>
+                    <p class="text-gray-600 font-noto max-w-md mx-auto mb-6">রক্তদাতা হিসেবে আপনার নিবন্ধন সফলভাবে সম্পন্ন হয়েছে। আপনার এই মহান উদ্যোগের জন্য অসংখ্য ধন্যবাদ।</p>
+                    <a href="blood-donors.html" class="inline-block bg-green-100 text-green-700 font-bold px-8 py-3 rounded-xl hover:bg-green-200 transition">
+                        রক্তদাতা তালিকায় ফিরে যান
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Toggle the visibility of the donation history fields
+        function toggleDonationHistory(hasDonated) {
+            const historyDetails = document.getElementById('historyDetails');
+            const timesDonated = document.getElementById('timesDonated');
+            const lastDonation = document.getElementById('lastDonation');
+
+            if (hasDonated) {
+                historyDetails.classList.remove('hidden');
+                // Make them required when visible
+                timesDonated.setAttribute('required', 'true');
+                lastDonation.setAttribute('required', 'true');
+            } else {
+                historyDetails.classList.add('hidden');
+                // Remove required when hidden
+                timesDonated.removeAttribute('required');
+                lastDonation.removeAttribute('required');
+                // Clear the values
+                timesDonated.value = '';
+                lastDonation.value = '';
+            }
+        }
+
+        // Form Submit Simulation
+        function submitDonorForm(event) {
+            event.preventDefault(); // Prevent page reload
+            
+            // Hide the form and show the success message
+            document.getElementById('donorForm').style.display = 'none';
+            
+            const successMsg = document.getElementById('successMsg');
+            successMsg.classList.remove('hidden');
+            
+            // Scroll to top of the card smoothly
+            window.scrollTo({
+                top: successMsg.offsetTop - 100,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+</html>

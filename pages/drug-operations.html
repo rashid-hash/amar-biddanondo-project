@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>প্রতিনিধি | আমার বিদ্যানন্দ</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F9D58', // Green Theme
+                        repBg: '#f8fafc',
+                    },
+                    fontFamily: {
+                        bengali: ['"Hind Siliguri"', 'sans-serif'],
+                        noto: ['"Noto Sans Bengali"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-bengali bg-gray-50 text-gray-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 px-6 py-4 flex justify-between items-center shadow-sm border-b border-gray-100">
+        <div class="flex items-center gap-3">
+            <a href="../index.html" class="bg-gray-100 hover:bg-gray-200 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">মাদক অভিযান</h1>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        
+        <!-- Header Text -->
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">মাদককে না বলি, অপরাধমুক্ত সমাজ গড়ি</h2>
+            <p class="text-gray-500 font-noto text-sm">একজন মানুষ যখন অপরাধ জগতে পা বাড়ায়, প্রথম সিঁড়িটা হলো মাদকদ্রব্য।</p>
+        </div>
+
+        <!-- Legal Warning Banner -->
+<div class="max-w-3xl mx-auto mt-5 mb-8 bg-red-50/80 backdrop-blur-sm border border-red-200 rounded-2xl p-4 shadow-sm flex flex-col sm:flex-row items-center sm:items-start gap-4 transition duration-300 hover:shadow-md hover:bg-red-50">
+    <!-- Icon -->
+    <div class="shrink-0 bg-red-100 text-red-600 w-10 h-10 rounded-full flex items-center justify-center text-xl shadow-inner border border-red-200">
+        ⚖️
+    </div>
+    
+    <!-- Text Content -->
+    <div class="text-center sm:text-left flex-grow">
+        <h4 class="text-xl font-bold text-red-800 mb-1">আইনি সতর্কবার্তা</h4>
+        <p class="text-1g md:text-sm text-gray-700 font-noto leading-relaxed">
+            <span class="font-semibold text-red-700">বাংলাদেশ সরকারের মাদকদ্রব্য নিয়ন্ত্রণ আইন, ২০১৮</span> অনুযায়ী মাদকদ্রব্য উৎপাদন, প্রক্রিয়াজাতকরণ, বহন, সরবরাহ এবং সেবন একটি দণ্ডনীয় অপরাধ। অপরাধ প্রমাণিত হলে যাবজ্জীবন কারাদণ্ড বা মৃত্যুদণ্ড হতে পারে।
+        </p>
+    </div>
+
+    <!-- Action Button (Optional) -->
+    <div class="shrink-0 mt-2 sm:mt-0">
+        <a href="drag-details.html" class="inline-flex items-center gap-1.5 text-xs font-bold text-red-700 bg-white border border-red-200 hover:bg-red-600 hover:text-white px-4 py-2 rounded-xl transition duration-300 shadow-sm">
+            <span>বিস্তারিত পড়ুন</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+        </a>
+    </div>
+</div>
+<!-- End Legal Warning Banner -->
+
+        <!-- Filter Buttons (Category) -->
+        <div class="flex gap-2 overflow-x-auto no-scrollbar pb-4 mb-6">
+            <button class="shrink-0 bg-primary text-white px-5 py-2 rounded-full font-bold text-sm shadow-sm">সবাই</button>
+            <button class="shrink-0 bg-white border border-gray-200 text-gray-600 px-5 py-2 rounded-full font-semibold text-sm hover:bg-gray-50 transition">মাদক ব্যবসায়ী</button>
+            <button class="shrink-0 bg-white border border-gray-200 text-gray-600 px-5 py-2 rounded-full font-semibold text-sm hover:bg-gray-50 transition">মাদক সেবি</button>
+            <button class="shrink-0 bg-white border border-gray-200 text-gray-600 px-5 py-2 rounded-full font-semibold text-sm hover:bg-gray-50 transition">কিশোর গ্যাং</button>
+        </div>
+
+        <!-- Representatives Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Representative Card 1 (Demo) -->
+            <div class="glass-card flex flex-col group overflow-hidden border border-gray-100 shadow-sm transition duration-300 hover:shadow-md bg-white rounded-2xl">
+                <!-- Image Section with Gradient Overlay -->
+                <div class="relative h-56 bg-gray-200 overflow-hidden">
+                    <img src="https://picsum.photos/400/400?random=201" alt="Representative Profile" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
+                        <span class="inline-block bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded mb-1">মাদক ব্যবসায়ী</span>
+                        <h3 class="text-white font-bold text-xl">#####</h3>
+                    </div>
+                </div>
+                
+                <!-- Details Section -->
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="space-y-3 mb-5 text-sm font-noto text-gray-600 flex-grow">
+                        <div class="flex items-start gap-2.5">
+                            <span class="mt-0.5 text-primary">💼</span> 
+                            <p><strong>পেশা:</strong> মাদক ব্যবসা</p>
+                        </div>
+                        <div class="flex items-start gap-2.5">
+                            <span class="mt-0.5 text-primary">📍</span> 
+                            <p><strong>ঠিকানা:</strong> ######</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex gap-3 mt-auto">
+                        <a href="#" class="flex-grow bg-primary/10 text-primary border border-primary/20 text-center py-2.5 rounded-xl font-bold shadow-sm hover:bg-primary hover:text-white transition duration-300 text-sm flex items-center justify-center gap-1.5">প্রমান দেখুন</a>
+                        <a href="#" target="_blank" class="bg-green-500 text-white px-4 py-2.5 rounded-xl shadow-sm hover:bg-green-600 transition duration-300 flex items-center justify-center text-lg">শেয়ার করুন</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card 1 -->
+
+            <!-- Representative Card 2 (Demo) -->
+            <div class="glass-card flex flex-col group overflow-hidden border border-gray-100 shadow-sm transition duration-300 hover:shadow-md bg-white rounded-2xl">
+                <!-- Image Section with Gradient Overlay -->
+                <div class="relative h-56 bg-gray-200 overflow-hidden">
+                    <img src="https://picsum.photos/400/400?random=201" alt="Representative Profile" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
+                        <span class="inline-block bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded mb-1">মাদক ব্যবসায়ী</span>
+                        <h3 class="text-white font-bold text-xl">#####</h3>
+                    </div>
+                </div>
+                
+                <!-- Details Section -->
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="space-y-3 mb-5 text-sm font-noto text-gray-600 flex-grow">
+                        <div class="flex items-start gap-2.5">
+                            <span class="mt-0.5 text-primary">💼</span> 
+                            <p><strong>পেশা:</strong> মাদক ব্যবসা</p>
+                        </div>
+                        <div class="flex items-start gap-2.5">
+                            <span class="mt-0.5 text-primary">📍</span> 
+                            <p><strong>ঠিকানা:</strong> ######</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex gap-3 mt-auto">
+                        <a href="#" class="flex-grow bg-primary/10 text-primary border border-primary/20 text-center py-2.5 rounded-xl font-bold shadow-sm hover:bg-primary hover:text-white transition duration-300 text-sm flex items-center justify-center gap-1.5">প্রমান দেখুন</a>
+                        <a href="#" target="_blank" class="bg-green-500 text-white px-4 py-2.5 rounded-xl shadow-sm hover:bg-green-600 transition duration-300 flex items-center justify-center text-lg">শেয়ার করুন</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card 2 -->
+
+            <!-- Representative Card 3 (Demo) -->
+            <div class="glass-card flex flex-col group overflow-hidden border border-gray-100 shadow-sm transition duration-300 hover:shadow-md bg-white rounded-2xl">
+                <!-- Image Section with Gradient Overlay -->
+                <div class="relative h-56 bg-gray-200 overflow-hidden">
+                    <img src="https://picsum.photos/400/400?random=201" alt="Representative Profile" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-4">
+                        <span class="inline-block bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded mb-1">মাদক ব্যবসায়ী</span>
+                        <h3 class="text-white font-bold text-xl">#####</h3>
+                    </div>
+                </div>
+                
+                <!-- Details Section -->
+                <div class="p-5 flex flex-col flex-grow">
+                    <div class="space-y-3 mb-5 text-sm font-noto text-gray-600 flex-grow">
+                        <div class="flex items-start gap-2.5">
+                            <span class="mt-0.5 text-primary">💼</span> 
+                            <p><strong>পেশা:</strong> মাদক ব্যবসা</p>
+                        </div>
+                        <div class="flex items-start gap-2.5">
+                            <span class="mt-0.5 text-primary">📍</span> 
+                            <p><strong>ঠিকানা:</strong> ######</p>
+                        </div>
+                    </div>
+                    <!-- Action Buttons -->
+                    <div class="flex gap-3 mt-auto">
+                        <a href="#" class="flex-grow bg-primary/10 text-primary border border-primary/20 text-center py-2.5 rounded-xl font-bold shadow-sm hover:bg-primary hover:text-white transition duration-300 text-sm flex items-center justify-center gap-1.5">প্রমান দেখুন</a>
+                        <a href="#" target="_blank" class="bg-green-500 text-white px-4 py-2.5 rounded-xl shadow-sm hover:bg-green-600 transition duration-300 flex items-center justify-center text-lg">শেয়ার করুন</a>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Card 3 -->
+
+        </div>
+    </main>
+</body>
+</html>

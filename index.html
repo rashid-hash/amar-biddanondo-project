@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>আমার বিদ্যানন্দ</title>
+
+    <meta name="description" content="আমার বিদ্যানন্দ স্মার্ট ইউনিয়ন প্ল্যাটফর্ম" />
+    <meta name="theme-color" content="#0F9D58" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F9D58',
+                        secondary: '#ffffff',
+                        accent: '#2196F3',
+                        darkBg: '#121212'
+                    },
+                    fontFamily: {
+                        bengali: ['"Hind Siliguri"', 'sans-serif'],
+                        noto: ['"Noto Sans Bengali"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        .glass-header {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .notice-scroll {
+            white-space: nowrap;
+            display: inline-block;
+            animation: scroll-left 20s linear infinite;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-800 antialiased overflow-x-hidden relative">
+
+    <!-- Background -->
+    <div class="fixed inset-0 -z-10 bg-gradient-to-br from-green-50 via-white to-blue-50"></div>
+
+    <!-- Navbar -->
+    <nav class="glass-header sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold shadow-lg">
+                আবি
+            </div>
+
+            <h1 class="text-xl font-bold text-primary">
+                আমার বিদ্যানন্দ
+            </h1>
+        </div>
+
+        <div id="authContainer">
+            <a href="pages/login.html"
+                class="bg-primary text-white px-6 py-2 rounded-full font-bold shadow hover:bg-green-700 transition duration-300">
+                লগইন
+            </a>
+        </div>
+
+    </nav>
+
+    <!-- Main -->
+    <main class="container mx-auto px-4 pb-20">
+
+        <!-- Hero -->
+        <section class="mt-8 mb-12 relative rounded-3xl overflow-hidden glass-card p-8 md:p-16 text-center">
+
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-800 mb-4 tracking-tight">
+                ডিজিটাল স্মার্ট ইউনিয়ন প্ল্যাটফর্ম
+            </h2>
+
+            <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto font-noto">
+                নাগরিক সেবা, শিক্ষা, কৃষি এবং জরুরি সহায়তা এখন আপনার হাতের মুঠোয়।
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+
+                <button
+                    class="bg-primary text-white px-8 py-3 rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transition duration-300 font-semibold">
+                    নাগরিক সেবা গ্রহণ
+                </button>
+
+                <a href="pages/union-info.html"
+                    class="inline-block bg-white text-primary border-2 border-primary px-8 py-3 rounded-full shadow hover:bg-green-50 transition duration-300 font-semibold">
+                    ইউনিয়ন পরিচিতি
+                </a>
+
+            </div>
+
+        </section>
+
+        <!-- Services -->
+        <section class="mb-12">
+
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-accent pl-3">
+                জরুরি সেবাসমূহ
+            </h3>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
+
+                <!-- নাগরিক সেবা -->
+                <a href="pages/citizen-services.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center hover:bg-blue-50 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition duration-300">📄</div>
+                    <span class="font-semibold text-gray-700 text-center">নাগরিক সেবা</span>
+                </a>
+
+                <!-- শিক্ষা -->
+                <a href="pages/education.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center hover:bg-green-50 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition duration-300">🏫</div>
+                    <span class="font-semibold text-gray-700 text-center">শিক্ষা প্রতিষ্ঠান</span>
+                </a>
+
+                <!-- কৃষি সেবা -->
+                <a href="pages/agriculture.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center hover:bg-green-50 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition duration-300">🌾</div>
+                    <span class="font-semibold text-gray-700 text-center">কৃষি সেবা</span>
+                </a>
+
+                <!-- জরুরি যোগাযোগ -->
+                <a href="pages/emergency.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center hover:bg-red-50 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition duration-300">🚑</div>
+                    <span class="font-semibold text-gray-700 text-center">জরুরি যোগাযোগ</span>
+                </a>
+
+                <!-- অভিযোগ -->
+                <a href="pages/complaint.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center hover:bg-yellow-50 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition duration-300">⚖️</div>
+                    <span class="font-semibold text-gray-700 text-center">অভিযোগ</span>
+                </a>
+
+                <!-- ইউনিয়ন সংবাদ -->
+                <a href="pages/union-news.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center hover:bg-blue-50 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition duration-300">📰</div>
+                    <span class="font-semibold text-gray-700 text-center">ইউনিয়ন সংবাদ</span>
+                </a>
+
+                <!-- ব্যবসা ডিরেক্টরি -->
+                <a href="pages/business-directory.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center hover:bg-purple-50 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition duration-300">🏪</div>
+                    <span class="font-semibold text-gray-700 text-center">ব্যবসা ডিরেক্টরি</span>
+                </a>
+
+                <!-- রক্তদাতা তালিকা -->
+                <a href="pages/blood-donors.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center hover:bg-red-100 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition duration-300">🩸</div>
+                    <span class="font-semibold text-gray-700 text-center">রক্তদাতা তালিকা</span>
+                </a>
+
+                <!-- ভূমি সেবা -->
+                <a href="pages/land-services.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center hover:bg-amber-50 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition duration-300">🗺️</div>
+                    <span class="font-semibold text-gray-700 text-center">ভূমি সেবা</span>
+                </a>
+                
+                <!-- ই-সেবা কেন্দ্র -->
+                <a href="pages/e-services.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center hover:bg-teal-50 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition duration-300">💻</div>
+                    <span class="font-semibold text-gray-700 text-center">ই-সেবা কেন্দ্র</span>
+                </a>
+
+                <!-- সামাজিক সংগঠন -->
+                <a href="pages/social-organizations.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-orange-50 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition transform duration-300">🤝</div>
+                    <span class="font-semibold text-gray-700 text-center">সামাজিক সংগঠন</span>
+                </a>
+
+                <!-- মাদক অভিযান -->
+                <a href="pages/drug-operations.html"
+                    class="glass-card p-6 flex flex-col items-center justify-center cursor-pointer hover:bg-green-50 transition duration-300 group">
+                    <div class="text-3xl mb-3 group-hover:scale-110 transition transform duration-300">👔</div>
+                    <span class="font-semibold text-gray-700 text-center">মাদক অভিযান</span>
+                </a>
+
+
+            </div>
+
+        </section>
+
+        <!-- Notice -->
+        <section class="mb-12">
+
+            <div class="glass-card p-4 flex items-center gap-4 overflow-hidden">
+
+                <div class="bg-red-500 text-white px-4 py-1.5 rounded-full font-semibold text-sm shrink-0 animate-pulse">
+                    নোটিশ
+                </div>
+
+                <div class="overflow-hidden w-full">
+                    <div class="notice-scroll text-gray-700 font-medium">
+                        আগামী ১৫ই মে থেকে ইউনিয়ন পরিষদে বিনামূল্যে স্বাস্থ্যসেবা ক্যাম্প অনুষ্ঠিত হবে।
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Stats -->
+        <section class="mb-12">
+
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 border-l-4 border-accent pl-3">
+                এক নজরে ইউনিয়ন
+            </h3>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+                <div class="glass-card p-6 text-center">
+                    <div class="text-3xl mb-2">🏘️</div>
+                    <h4 class="text-3xl font-bold text-primary">15</h4>
+                    <p class="text-gray-600 text-sm mt-1">মোট গ্রাম</p>
+                </div>
+
+                <div class="glass-card p-6 text-center">
+                    <div class="text-3xl mb-2">👥</div>
+                    <h4 class="text-3xl font-bold text-primary">25000</h4>
+                    <p class="text-gray-600 text-sm mt-1">জনসংখ্যা</p>
+                </div>
+
+                <div class="glass-card p-6 text-center">
+                    <div class="text-3xl mb-2">🎓</div>
+                    <h4 class="text-3xl font-bold text-primary">12</h4>
+                    <p class="text-gray-600 text-sm mt-1">শিক্ষা প্রতিষ্ঠান</p>
+                </div>
+
+                <div class="glass-card p-6 text-center">
+                    <div class="text-3xl mb-2">🏥</div>
+                    <h4 class="text-3xl font-bold text-primary">4</h4>
+                    <p class="text-gray-600 text-sm mt-1">ক্লিনিক ও হাসপাতাল</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Chairman -->
+        <section class="mb-12">
+
+            <div class="glass-card p-6 md:p-8 flex flex-col md:flex-row gap-6 items-center">
+
+                <div class="w-full md:w-1/3 flex justify-center">
+
+                    <div
+                        class="w-32 h-32 md:w-40 md:h-40 rounded-full bg-gray-200 border-4 border-primary shadow-lg overflow-hidden flex items-center justify-center">
+                        ছবি
+                    </div>
+
+                </div>
+
+                <div class="w-full md:w-2/3 text-center md:text-left">
+
+                    <h3 class="text-2xl font-bold text-gray-800 mb-1">
+                        চেয়ারম্যানের বার্তা
+                    </h3>
+
+                    <h4 class="text-lg font-semibold text-primary mb-3">
+                        জনাব মোঃ আব্দুর রহমান
+                    </h4>
+
+                    <p class="text-gray-600 leading-relaxed">
+                        আমার বিদ্যানন্দ ইউনিয়নকে একটি আধুনিক স্মার্ট ইউনিয়ন হিসেবে গড়ে তোলাই আমাদের লক্ষ্য।
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- Gallery + Map -->
+        <section class="mb-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Gallery -->
+            <div class="glass-card p-6">
+
+                <h2 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-primary pl-2">
+                    ইউনিয়ন গ্যালারি
+                </h2>
+
+                <div class="grid grid-cols-2 gap-4">
+
+                    <div class="rounded-xl overflow-hidden h-40">
+                        <img src="assets/images/pic1.jpg" class="w-full h-full object-cover" alt="">
+                    </div>
+
+                    <div class="rounded-xl overflow-hidden h-40">
+                        <img src="assets/images/pic2.jpg" class="w-full h-full object-cover" alt="">
+                    </div>
+
+                    <div class="rounded-xl overflow-hidden h-40">
+                        <img src="assets/images/pic3.jpg" class="w-full h-full object-cover" alt="">
+                    </div>
+
+                    <div class="rounded-xl overflow-hidden h-40">
+                        <img src="assets/images/pic4.jpg" class="w-full h-full object-cover" alt="">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Map -->
+            <div class="glass-card p-6">
+
+                <h3 class="text-xl font-bold text-gray-800 mb-4 border-l-4 border-accent pl-3">
+                    স্মার্ট ম্যাপ
+                </h3>
+
+                <div class="h-[350px] rounded-xl overflow-hidden">
+
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.0506214443917!2d90.38699131543141!3d23.745583194883445!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8b087026b81%3A0x8fa563bbdd5904c2!2sDhaka%2C%20Bangladesh!5e0!3m2!1sen!2sbd!4v1683900000000!5m2!1sen!2sbd"
+                        width="100%"
+                        height="100%"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy">
+                    </iframe>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6 mt-12 border-t-4 border-primary">
+
+        <div class="container mx-auto px-6">
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+
+                <div>
+                    <h3 class="text-xl font-bold text-primary mb-4">
+                        আমার বিদ্যানন্দ
+                    </h3>
+
+                    <p class="text-gray-400 text-sm">
+                        আধুনিক স্মার্ট ইউনিয়ন ডিজিটাল প্ল্যাটফর্ম।
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">
+                        প্রয়োজনীয় লিংক
+                    </h3>
+
+                    <ul class="text-gray-400 text-sm space-y-2">
+
+                        <li>
+                            <a href="#" class="hover:text-primary">
+                                জাতীয় তথ্য বাতায়ন
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="hover:text-primary">
+                                জন্ম নিবন্ধন
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold mb-4">
+                        যোগাযোগ
+                    </h3>
+
+                    <ul class="text-gray-400 text-sm space-y-2">
+
+                        <li>📍 বিদ্যানন্দ ইউনিয়ন পরিষদ</li>
+                        <li>📞 +৮৮০ ১৭১২-৩৪৫৬৭৮</li>
+                        <li>📧 info@amarbidyananda.gov.bd</li>
+
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 text-center text-xs text-gray-500">
+                © 2026 আমার বিদ্যানন্দ স্মার্ট ইউনিয়ন
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+    <!-- App JS -->
+    <script src="js/app.js"></script>
+
+    <!-- Firebase Config -->
+    <script>
+
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        auth.onAuthStateChanged(async (user) => {
+
+            const authContainer = document.getElementById('authContainer');
+
+            if (user) {
+
+                try {
+
+                    const doc = await db.collection("users").doc(user.uid).get();
+
+                    let userName = "ব্যবহারকারী";
+
+                    if (doc.exists && doc.data().name) {
+                        userName = doc.data().name;
+                    }
+
+                    authContainer.innerHTML = `
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-gray-700 bg-green-50 px-3 py-1.5 rounded-xl border border-green-200 text-sm">
+                                👤 ${userName}
+                            </span>
+
+                            <button onclick="logoutUser()"
+                                class="text-xs font-bold text-white bg-red-500 hover:bg-red-600 px-3 py-1.5 rounded-xl transition">
+                                লগআউট
+                            </button>
+                        </div>
+                    `;
+
+                } catch (error) {
+                    console.log(error);
+                }
+
+            } else {
+
+                authContainer.innerHTML = `
+                    <a href="pages/login.html"
+                        class="bg-primary text-white px-6 py-2 rounded-full font-bold shadow hover:bg-green-700 transition duration-300">
+                        লগইন
+                    </a>
+                `;
+            }
+
+        });
+
+        function logoutUser() {
+
+            auth.signOut()
+                .then(() => {
+                    window.location.reload();
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+
+        }
+
+    </script>
+
+</body>
+</html>

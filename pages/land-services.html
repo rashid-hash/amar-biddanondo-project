@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ভূমি সেবা ও পরিমাপ | আমার বিদ্যানন্দ</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F9D58',
+                        secondary: '#ffffff',
+                        accent: '#2196F3',
+                        darkBg: '#121212'
+                    },
+                    fontFamily: {
+                        bengali: ['"Hind Siliguri"', 'sans-serif'],
+                        noto: ['"Noto Sans Bengali"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-bengali bg-gray-50 text-gray-800 antialiased overflow-x-hidden relative min-h-screen flex flex-col">
+    
+    <div class="fixed inset-0 z-[-1] bg-gradient-to-br from-amber-50 via-white to-green-50"></div>
+
+    <nav class="glass-header sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <a href="../index.html" class="bg-gray-100 hover:bg-gray-200 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition duration-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">ভূমি সেবা</h1>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        
+        <div class="text-center mb-10">
+            <div class="inline-block p-4 rounded-full bg-amber-100 text-amber-600 mb-4 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-2">ডিজিটাল ভূমি সেবা ও পরিমাপ</h2>
+            <p class="text-gray-600 font-noto">আপনার জমির সঠিক পরিমাপ জানুন এবং সরকারি ভূমি সেবা গ্রহণ করুন সহজেই।</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div class="md:col-span-2">
+                        <div class="glass-card p-4 md:p-6 mb-8 mt-2">
+            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-6 border-l-4 border-primary pl-3">ভূমির পরিমাপ ক্যালকুলেটর</h3>
+            
+                        <form id="landCalcForm" onsubmit="calculateLand(event)">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">জমির দৈর্ঘ্য (ফুট)</label>
+                        <input type="number" id="landLength" step="0.01" required placeholder="যেমন: 100" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition bg-white/50 text-gray-800 font-noto">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">জমির প্রস্থ (ফুট)</label>
+                        <input type="number" id="landWidth" step="0.01" required placeholder="যেমন: 50" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition bg-white/50 text-gray-800 font-noto">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-primary text-white font-bold text-lg py-3.5 rounded-xl shadow-lg hover:bg-green-700 transition transform hover:-translate-y-0.5 duration-300">
+                    হিসাব করুন
+                </button>
+            </form>
+
+            <div id="landResultBox" class="hidden mt-6 bg-gradient-to-br from-green-50 to-white p-5 rounded-xl border border-green-200 shadow-sm">
+                <h4 class="font-bold text-green-800 text-lg mb-3 border-b border-green-200 pb-2">জমির পরিমাণ:</h4>
+                <div class="grid grid-cols-2 gap-3 text-sm md:text-base font-noto">
+                    <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm text-center">
+                        <span class="block text-gray-500 text-xs mb-1">বর্গফুট</span>
+                        <span id="resSqFt" class="font-bold text-gray-800 text-lg">0</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm text-center">
+                        <span class="block text-gray-500 text-xs mb-1">শতাংশ/ডেসিমাল</span>
+                        <span id="resShotangsho" class="font-bold text-green-600 text-lg">0</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm text-center">
+                        <span class="block text-gray-500 text-xs mb-1">কাঠা</span>
+                        <span id="resKatha" class="font-bold text-gray-800 text-lg">0</span>
+                    </div>
+                    <div class="bg-white p-3 rounded-lg border border-gray-100 shadow-sm text-center">
+                        <span class="block text-gray-500 text-xs mb-1">বিঘা</span>
+                        <span id="resBigha" class="font-bold text-gray-800 text-lg">0</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="glass-card p-4 md:p-6 mb-8 bg-gray-50/50">
+            <h3 class="text-lg font-bold text-gray-800 mb-4 border-l-4 border-primary pl-2">পরিমাপের সাধারণ সূত্র</h3>
+            <ul class="space-y-3 text-sm md:text-base text-gray-700 font-noto">
+                <li class="flex justify-between border-b border-gray-200 pb-2">
+                    <span>১ শতাংশ/ডেসিমাল</span>
+                    <span class="font-bold">৪৩৫.৬ বর্গফুট</span>
+                </li>
+                <li class="flex justify-between border-b border-gray-200 pb-2">
+                    <span>১ কাঠা</span>
+                    <span class="font-bold">৭২০ বর্গফুট (১.৬৫ শতাংশ)</span>
+                </li>
+                <li class="flex justify-between border-b border-gray-200 pb-2">
+                    <span>১ বিঘা</span>
+                    <span class="font-bold">৩৩ শতাংশ (২০ কাঠা)</span>
+                </li>
+                <li class="flex justify-between pb-1">
+                    <span>১ একর</span>
+                    <span class="font-bold">১০০ শতাংশ (৩ বিঘার বেশি)</span>
+                </li>
+            </ul>
+        </div>
+
+            </div>
+
+            <div>
+                                       <div class="glass-card p-4 md:p-6 mb-6">
+            <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-4 border-l-4 border-accent pl-2">গুরুত্বপূর্ণ ভূমি লিংক</h3>
+            <ul class="space-y-3 font-noto">
+                <li>
+                    <a href="https://mutation.land.gov.bd/" target="_blank" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 transition border border-gray-200 bg-white/40">
+                        <span class="bg-accent text-white p-2.5 rounded-lg text-lg flex items-center justify-center shrink-0">📄</span>
+                        <span class="font-semibold text-gray-700 text-sm md:text-base">ই-নামজারি আবেদন</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://ldtax.gov.bd/" target="_blank" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 transition border border-gray-200 bg-white/40">
+                        <span class="bg-green-500 text-white p-2.5 rounded-lg text-lg flex items-center justify-center shrink-0">💰</span>
+                        <span class="font-semibold text-gray-700 text-sm md:text-base">ভূমি উন্নয়ন কর (খাজনা)</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://e-porcha.com/" target="_blank" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-100 transition border border-gray-200 bg-white/40">
+                        <span class="bg-purple-500 text-white p-2.5 rounded-lg text-lg flex items-center justify-center shrink-0">📜</span>
+                        <span class="font-semibold text-gray-700 text-sm md:text-base">স্মার্ট খতিয়ান (ই-পর্চা)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+              
+ 
+                </div>
+            </div>
+                    <div class="glass-card p-6 md:p-8 mt-8 border-t-4 border-green-600 shadow-md">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="bg-green-100 text-green-600 p-3 rounded-full text-2xl shadow-sm">⚖️</div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-800">উত্তরাধিকার (ফরায়েজ) ক্যালকুলেটর</h3>
+                    <p class="text-sm text-gray-500 font-noto">পিতার রেখে যাওয়া সম্পত্তিতে ছেলে ও মেয়ের অংশ হিসাব করুন</p>
+                </div>
+            </div>
+
+            <form id="farayejForm" onsubmit="calculateFarayej(event)">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">মোট সম্পত্তি (শতাংশ/ডেসিমেল) <span class="text-red-500">*</span></label>
+                        <input type="number" id="totalLand" step="0.01" required placeholder="যেমন: 100" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition bg-white/50 font-noto text-lg font-bold">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">ছেলের সংখ্যা <span class="text-red-500">*</span></label>
+                        <input type="number" id="numSons" min="0" required placeholder="যেমন: 2" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition bg-white/50 font-noto">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">মেয়ের সংখ্যা <span class="text-red-500">*</span></label>
+                        <input type="number" id="numDaughters" min="0" required placeholder="যেমন: 1" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500 transition bg-white/50 font-noto">
+                    </div>
+                </div>
+
+                <div class="mb-6 flex items-start gap-3 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    <input type="checkbox" id="deductWifeShare" class="mt-1 w-5 h-5 text-green-600 focus:ring-green-500 rounded border-gray-300 cursor-pointer">
+                    <label for="deductWifeShare" class="text-sm text-gray-700 font-noto cursor-pointer">
+                        <strong class="text-gray-800">মাতা (স্ত্রী) জীবিত আছেন?</strong><br>
+                        টিক দিলে মোট সম্পত্তি থেকে প্রথমে স্ত্রীর ১/৮ অংশ (১২.৫%) বাদ দিয়ে, অবশিষ্ট সম্পত্তি ছেলে-মেয়েদের মাঝে ভাগ করা হবে।
+                    </label>
+                </div>
+
+                <button type="submit" class="w-full md:w-auto px-8 bg-green-600 text-white font-bold text-lg py-3 rounded-xl shadow-lg hover:bg-green-700 hover:-translate-y-1 transition transform duration-300 flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5 2a1 1 0 011 1v1h1a1 1 0 010 2H6v1a1 1 0 01-2 0V6H3a1 1 0 010-2h1V3a1 1 0 011-1zm0 10a1 1 0 011 1v1h1a1 1 0 110 2H6v1a1 1 0 11-2 0v-1H3a1 1 0 110-2h1v-1a1 1 0 011-1zM12 2a1 1 0 01.967.744L14.146 7.2 17.5 9.134a1 1 0 010 1.732l-3.354 1.935-1.18 4.455a1 1 0 01-1.933 0L9.854 12.8 6.5 10.866a1 1 0 010-1.732l3.354-1.935 1.18-4.455A1 1 0 0112 2z" clip-rule="evenodd" /></svg>
+                    হিসাব করুন
+                </button>
+            </form>
+
+            <div id="resultBox" class="hidden mt-8 bg-gradient-to-br from-green-50 to-white p-6 rounded-2xl border border-green-200 shadow-sm">
+                <h4 class="font-bold text-green-800 text-lg mb-4 border-b border-green-200 pb-2">সম্পত্তি বণ্টনের হিসাব:</h4>
+                
+                <div id="wifeShareResult" class="hidden mb-4 bg-yellow-50 p-3 rounded-lg border border-yellow-200 text-sm">
+                    <span class="text-yellow-800 font-bold">মাতার (স্ত্রীর) অংশ (১/৮):</span> 
+                    <span id="wifeAmount" class="font-bold text-gray-800 ml-1">0</span> শতাংশ
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-gray-500 text-sm font-noto mb-1">প্রতিটি ছেলে পাবে (২ ভাগ)</span>
+                            <span id="sonResult" class="text-2xl font-bold text-gray-800">0</span> <span class="text-sm font-semibold text-gray-600">শতাংশ</span>
+                        </div>
+                        <div class="text-4xl opacity-20">👨</div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between">
+                        <div>
+                            <span class="block text-gray-500 text-sm font-noto mb-1">প্রতিটি মেয়ে পাবে (১ ভাগ)</span>
+                            <span id="daughterResult" class="text-2xl font-bold text-gray-800">0</span> <span class="text-sm font-semibold text-gray-600">শতাংশ</span>
+                        </div>
+                        <div class="text-4xl opacity-20">👩</div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 p-3 bg-red-50 text-red-600 text-xs font-noto rounded-lg">
+                    <strong>সতর্কতা:</strong> এটি একটি প্রাথমিক হিসাব। ইসলামি শরিয়াহ অনুযায়ী মৃত ব্যক্তির পিতামাতা জীবিত থাকলে বা অন্যান্য শর্তে হিস্যা ভিন্ন হতে পারে। পূর্ণাঙ্গ ফরায়েজের জন্য অবশ্যই বিজ্ঞ আলেম বা আইনজীবীর পরামর্শ নিন।
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+    </main>
+    <script>
+        function calculateLand(event) {
+            event.preventDefault(); // পেজ রিলোড বন্ধ করবে
+
+            // ইনপুট থেকে দৈর্ঘ্য ও প্রস্থ নেওয়া
+            const length = parseFloat(document.getElementById('landLength').value);
+            const width = parseFloat(document.getElementById('landWidth').value);
+
+            // হিসাব করা (সরকারি সূত্র অনুযায়ী)
+            const sqFt = length * width;                 // বর্গফুট
+            const shotangsho = sqFt / 435.6;             // শতাংশ (৪৩৫.৬ বর্গফুট = ১ শতাংশ)
+            const katha = sqFt / 720;                    // কাঠা (৭২০ বর্গফুট = ১ কাঠা)
+            const bigha = shotangsho / 33;               // বিঘা (৩৩ শতাংশ = ১ বিঘা)
+
+            // রেজাল্ট বক্সে মান বসানো (দশমিকের পর ২ ঘর পর্যন্ত)
+            document.getElementById('resSqFt').innerText = sqFt.toFixed(2);
+            document.getElementById('resShotangsho').innerText = shotangsho.toFixed(2);
+            document.getElementById('resKatha').innerText = katha.toFixed(2);
+            document.getElementById('resBigha').innerText = bigha.toFixed(3);
+
+            // রেজাল্ট বক্সটি শো করা
+            const resultBox = document.getElementById('landResultBox');
+            resultBox.classList.remove('hidden');
+            
+            // সুন্দর একটি পপ-আপ অ্যানিমেশন
+            resultBox.classList.add('animate-pulse');
+            setTimeout(() => resultBox.classList.remove('animate-pulse'), 500);
+        }
+    </script>
+
+        <script>
+        function calculateFarayej(event) {
+            event.preventDefault(); // Prevent page reload
+
+            // Get Input Values
+            const totalLandInput = parseFloat(document.getElementById('totalLand').value);
+            const numSons = parseInt(document.getElementById('numSons').value) || 0;
+            const numDaughters = parseInt(document.getElementById('numDaughters').value) || 0;
+            const deductWifeShare = document.getElementById('deductWifeShare').checked;
+
+            if (numSons === 0 && numDaughters === 0) {
+                alert("দয়া করে ছেলে অথবা মেয়ের সংখ্যা দিন!");
+                return;
+            }
+
+            let distributableLand = totalLandInput;
+            let wifeAmount = 0;
+
+            // Deduct Wife's Share (1/8th or 12.5%)
+            if (deductWifeShare) {
+                wifeAmount = totalLandInput / 8;
+                distributableLand = totalLandInput - wifeAmount;
+                
+                document.getElementById('wifeShareResult').classList.remove('hidden');
+                document.getElementById('wifeAmount').innerText = wifeAmount.toFixed(2);
+            } else {
+                document.getElementById('wifeShareResult').classList.add('hidden');
+            }
+
+            // Calculate Portions (Son gets 2, Daughter gets 1)
+            const totalPortions = (numSons * 2) + (numDaughters * 1);
+            
+            // Value per 1 unit
+            const unitValue = distributableLand / totalPortions;
+
+            // Calculate individual shares
+            const sonShare = numSons > 0 ? (unitValue * 2) : 0;
+            const daughterShare = numDaughters > 0 ? (unitValue * 1) : 0;
+
+            // Display Results
+            document.getElementById('sonResult').innerText = sonShare.toFixed(2);
+            document.getElementById('daughterResult').innerText = daughterShare.toFixed(2);
+            
+            // Show the result box
+            const resultBox = document.getElementById('resultBox');
+            resultBox.classList.remove('hidden');
+            
+            // Highlight effect
+            resultBox.classList.add('animate-pulse');
+            setTimeout(() => resultBox.classList.remove('animate-pulse'), 500);
+        }
+    </script>
+
+</body>
+</html>

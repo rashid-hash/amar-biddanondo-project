@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>জরুরি যোগাযোগ | আমার বিদ্যানন্দ</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0F9D58',
+                        danger: '#EF4444', /* Red for emergency */
+                        dangerLight: '#FEF2F2',
+                    },
+                    fontFamily: {
+                        bengali: ['"Hind Siliguri"', 'sans-serif'],
+                        noto: ['"Noto Sans Bengali"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-bengali bg-gray-50 text-gray-800 antialiased overflow-x-hidden relative min-h-screen flex flex-col">
+    
+    <div class="fixed inset-0 z-[-1] bg-gradient-to-br from-red-50 via-white to-rose-50"></div>
+
+    <nav class="glass-header sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <a href="../index.html" class="bg-gray-100 hover:bg-gray-200 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 shadow-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+            </a>
+            <h1 class="text-xl font-bold text-gray-800">জরুরি যোগাযোগ</h1>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-4 py-8 flex-grow">
+        
+        <div class="glass-card bg-gradient-to-r from-red-600 to-danger text-white p-6 md:p-8 rounded-3xl mb-10 shadow-lg relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6 border-none">
+            <div class="absolute -right-10 -top-10 opacity-20 text-9xl">🚨</div>
+            <div class="relative z-10 text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
+                    <span class="animate-pulse text-2xl">🔴</span>
+                    <h2 class="text-2xl font-bold">জাতীয় জরুরি সেবা</h2>
+                </div>
+                <p class="text-red-100 font-noto text-sm md:text-base">যেকোনো জরুরি মুহূর্তে পুলিশ, ফায়ার সার্ভিস ও অ্যাম্বুলেন্স পেতে টোল ফ্রি নম্বরে কল করুন।</p>
+            </div>
+            <a href="tel:999" class="relative z-10 bg-white text-danger font-bold text-3xl md:text-4xl px-10 py-4 rounded-2xl shadow-xl hover:scale-105 transition transform duration-300 flex items-center gap-3">
+                <span>📞</span> ৯৯৯
+            </a>
+        </div>
+
+        <div class="glass-card p-4 mb-10 flex flex-wrap justify-center gap-2 md:gap-4 sticky top-20 z-40 shadow-sm">
+            <button class="filter-btn active bg-danger text-white px-5 py-2 rounded-full font-bold shadow-md transition" data-category="all">সব নম্বর</button>
+            <button class="filter-btn bg-white text-gray-700 hover:bg-red-50 border border-gray-200 px-4 py-2 rounded-full font-bold transition flex items-center gap-2" data-category="police"><span>🚓</span> পুলিশ</button>
+            <button class="filter-btn bg-white text-gray-700 hover:bg-red-50 border border-gray-200 px-4 py-2 rounded-full font-bold transition flex items-center gap-2" data-category="hospital"><span>🏥</span> হাসপাতাল</button>
+            <button class="filter-btn bg-white text-gray-700 hover:bg-red-50 border border-gray-200 px-4 py-2 rounded-full font-bold transition flex items-center gap-2" data-category="ambulance"><span>🚑</span> অ্যাম্বুলেন্স</button>
+            <button class="filter-btn bg-white text-gray-700 hover:bg-red-50 border border-gray-200 px-4 py-2 rounded-full font-bold transition flex items-center gap-2" data-category="fire"><span>🚒</span> ফায়ার সার্ভিস</button>
+            <button class="filter-btn bg-white text-gray-700 hover:bg-red-50 border border-gray-200 px-4 py-2 rounded-full font-bold transition flex items-center gap-2" data-category="union"><span>🏛️</span> ইউনিয়ন পরিষদ</button>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="emgGrid">
+            
+            <div class="glass-card relative overflow-hidden p-6 flex flex-col group emg-card hover:shadow-md transition" data-category="police">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-3xl shadow-sm border-2 border-white">🚓</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 leading-tight">থানা পুলিশ (ওসি)</h3>
+                        <p class="text-sm text-gray-500 font-noto">উপজেলা মডেল থানা</p>
+                    </div>
+                </div>
+                <div class="mt-auto pt-4 border-t border-gray-100">
+                    <a href="tel:01320000000" class="w-full bg-dangerLight text-danger font-bold py-3 rounded-xl hover:bg-danger hover:text-white transition duration-300 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+                        কল করুন
+                    </a>
+                </div>
+            </div>
+
+            <div class="glass-card relative overflow-hidden p-6 flex flex-col group emg-card hover:shadow-md transition" data-category="hospital">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl shadow-sm border-2 border-white">🏥</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 leading-tight">উপজেলা স্বাস্থ্য কমপ্লেক্স</h3>
+                        <p class="text-sm text-gray-500 font-noto">জরুরি বিভাগ (২৪ ঘণ্টা)</p>
+                    </div>
+                </div>
+                <div class="mt-auto pt-4 border-t border-gray-100">
+                    <a href="tel:01700000001" class="w-full bg-dangerLight text-danger font-bold py-3 rounded-xl hover:bg-danger hover:text-white transition duration-300 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+                        কল করুন
+                    </a>
+                </div>
+            </div>
+
+            <div class="glass-card relative overflow-hidden p-6 flex flex-col group emg-card hover:shadow-md transition" data-category="fire">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-3xl shadow-sm border-2 border-white">🚒</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 leading-tight">ফায়ার সার্ভিস স্টেশন</h3>
+                        <p class="text-sm text-gray-500 font-noto">উপজেলা ফায়ার স্টেশন</p>
+                    </div>
+                </div>
+                <div class="mt-auto pt-4 border-t border-gray-100">
+                    <a href="tel:01900000002" class="w-full bg-dangerLight text-danger font-bold py-3 rounded-xl hover:bg-danger hover:text-white transition duration-300 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+                        কল করুন
+                    </a>
+                </div>
+            </div>
+
+            <div class="glass-card relative overflow-hidden p-6 flex flex-col group emg-card hover:shadow-md transition" data-category="ambulance">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-gray-100 text-gray-700 rounded-full flex items-center justify-center text-3xl shadow-sm border-2 border-white">🚑</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 leading-tight">লোকাল অ্যাম্বুলেন্স (মোঃ রফিক)</h3>
+                        <p class="text-sm text-gray-500 font-noto">বিদ্যানন্দ বাজার স্ট্যান্ড</p>
+                    </div>
+                </div>
+                <div class="mt-auto pt-4 border-t border-gray-100">
+                    <a href="tel:01800000003" class="w-full bg-dangerLight text-danger font-bold py-3 rounded-xl hover:bg-danger hover:text-white transition duration-300 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+                        কল করুন
+                    </a>
+                </div>
+            </div>
+
+            <div class="glass-card relative overflow-hidden p-6 flex flex-col group emg-card hover:shadow-md transition" data-category="union">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center text-3xl shadow-sm border-2 border-white">👔</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 leading-tight">ইউপি চেয়ারম্যান</h3>
+                        <p class="text-sm text-gray-500 font-noto">জনাব মোঃ আব্দুর রহমান</p>
+                    </div>
+                </div>
+                <div class="mt-auto pt-4 border-t border-gray-100">
+                    <a href="tel:01711223344" class="w-full bg-dangerLight text-danger font-bold py-3 rounded-xl hover:bg-danger hover:text-white transition duration-300 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+                        কল করুন
+                    </a>
+                </div>
+            </div>
+
+            <div class="glass-card relative overflow-hidden p-6 flex flex-col group emg-card hover:shadow-md transition" data-category="other">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-full flex items-center justify-center text-3xl shadow-sm border-2 border-white">⚡</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 leading-tight">পল্লী বিদ্যুৎ অভিযোগ কেন্দ্র</h3>
+                        <p class="text-sm text-gray-500 font-noto">জোনাল অফিস</p>
+                    </div>
+                </div>
+                <div class="mt-auto pt-4 border-t border-gray-100">
+                    <a href="tel:01500000004" class="w-full bg-dangerLight text-danger font-bold py-3 rounded-xl hover:bg-danger hover:text-white transition duration-300 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" /></svg>
+                        কল করুন
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const emgCards = document.querySelectorAll('.emg-card');
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update Active Button Style
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-danger', 'text-white', 'active');
+                        b.classList.add('bg-white', 'text-gray-700');
+                    });
+                    btn.classList.remove('bg-white', 'text-gray-700');
+                    btn.classList.add('bg-danger', 'text-white', 'active');
+
+                    // Filter Cards
+                    const category = btn.getAttribute('data-category');
+                    
+                    emgCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
