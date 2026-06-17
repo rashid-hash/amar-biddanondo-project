@@ -30,6 +30,21 @@
         }
     </script>
 
+    <style>
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 25s linear infinite;
+        }
+        .ticker-container:hover .animate-ticker {
+            animation-play-state: paused; /* মাউস রাখলে এনিমেশন থেমে যাবে */
+        }
+    </style>
+
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 </head>
@@ -37,19 +52,28 @@
     
     <div class="fixed inset-0 z-[-1] bg-gradient-to-br from-red-50 via-white to-red-50"></div>
 
-    <nav class="glass-header sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
-        <div class="flex items-center gap-3">
+    <nav class="glass-header sticky top-0 z-50 px-4 md:px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2 md:gap-3">
             <a href="../index.html" class="bg-gray-100 hover:bg-gray-200 text-gray-700 w-10 h-10 rounded-full flex items-center justify-center transition duration-300 shadow-sm">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                 </svg>
             </a>
-            <h1 class="text-xl font-bold text-gray-800">রক্তদাতা তালিকা</h1>
+            <h1 class="text-lg md:text-xl font-bold text-gray-800 hidden sm:block">রক্তদাতা তালিকা</h1>
         </div>
         
-        <a href="donor-registration.html" class="bg-blood text-white px-4 py-2 rounded-full text-sm font-semibold shadow hover:bg-red-700 transition">
-            + রক্তদাতা হোন
-        </a>
+        <div class="flex items-center gap-2">
+            <a href="blood-requests.html" class="bg-red-50 text-blood border border-red-200 px-3 py-2 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold shadow-sm hover:bg-red-100 transition flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                রক্তের আবেদন
+            </a>
+            
+            <a href="donor-registration.html" class="bg-blood text-white px-3 py-2 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold shadow hover:bg-red-700 transition">
+                + রক্তদাতা হোন
+            </a>
+        </div>
     </nav>
 
     <main class="container mx-auto px-4 py-8 flex-grow">
@@ -63,6 +87,22 @@
             </div>
             <h2 class="text-3xl font-bold text-gray-800 mb-2">জীবন বাঁচাতে রক্ত দিন</h2>
             <p class="text-gray-600 font-noto max-w-lg mx-auto">জরুরি মুহূর্তে আপনার ইউনিয়নের স্বেচ্ছাসেবী রক্তদাতাদের সাথে সরাসরি যোগাযোগ করুন।</p>
+        </div>
+
+        <div id="emergencyTickerContainer" class="hidden max-w-5xl mx-auto mb-6 px-4">
+            <div class="flex items-center bg-white border border-red-200 rounded-full shadow-sm overflow-hidden ticker-container relative">
+                <div class="bg-blood text-white font-bold text-xs md:text-sm px-4 py-2.5 z-10 flex items-center gap-2 shrink-0 shadow-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                    </svg>
+                    জরুরি রক্তের খোঁজ
+                </div>
+                
+                <div class="overflow-hidden flex-grow relative w-full">
+                    <div id="tickerTrack" class="animate-ticker text-sm py-2">
+                        </div>
+                </div>
+            </div>
         </div>
 
         <div class="glass-card p-4 mb-10 flex flex-wrap justify-center gap-2 md:gap-4 sticky top-20 z-40">
@@ -175,7 +215,6 @@
 
             </div>
         </div>
-
     </main>
 
     <footer class="mt-12 py-6 border-t border-gray-100 text-center">
@@ -187,15 +226,24 @@
         </p>
     </footer>
 
+    <a href="blood-requests.html" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-red-600 text-white p-3 md:p-4 rounded-full shadow-2xl hover:bg-red-700 hover:scale-110 transition-transform duration-300 z-50 flex items-center gap-2 group animate-bounce" title="জরুরি রক্তের আবেদন">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 md:h-7 md:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <span class="font-bold hidden md:inline-block max-w-0 group-hover:max-w-xs overflow-hidden transition-all duration-500 ease-in-out whitespace-nowrap pl-1">
+            জরুরি রক্তের আবেদন
+        </span>
+    </a>
+
     <script>
-        // আপনার Firebase Config এখানে বসান
+        // আপনার Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyCrziU51OfAfmlAQlvv3EWK5j9xkbMWV34",
-  authDomain: "dharla-blood-bank.firebaseapp.com",
-  projectId: "dharla-blood-bank",
-  storageBucket: "dharla-blood-bank.firebasestorage.app",
-  messagingSenderId: "110091910831",
-  appId: "1:110091910831:web:c92cab6085da9bbea11e5a"
+            authDomain: "dharla-blood-bank.firebaseapp.com",
+            projectId: "dharla-blood-bank",
+            storageBucket: "dharla-blood-bank.firebasestorage.app",
+            messagingSenderId: "110091910831",
+            appId: "1:110091910831:web:c92cab6085da9bbea11e5a"
         };
 
         firebase.initializeApp(firebaseConfig);
@@ -214,16 +262,13 @@
             snapshot.forEach((childSnapshot) => {
                 const donor = childSnapshot.val();
                 
-                // Profile Image Logic (Custom link OR Auto-generated Avatar)
                 const avatarUrl = donor.profileImage && donor.profileImage.trim() !== '' 
                                     ? donor.profileImage 
                                     : `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(donor.name)}`;
                 
-                // WhatsApp Formatting (+88)
                 let waNumber = donor.whatsapp || donor.phone;
                 waNumber = waNumber.startsWith('0') ? '88' + waNumber : waNumber;
 
-                // FB Link Fallback
                 const fbLink = (donor.fbLink && donor.fbLink !== '#' && donor.fbLink.trim() !== '') ? donor.fbLink : '#';
                 const fbTarget = fbLink === '#' ? '_self' : '_blank';
 
@@ -289,7 +334,6 @@
                 donorGrid.innerHTML += cardHTML;
             });
 
-            // Re-initialize Filter Setup after cards are rendered
             setupFilters();
         });
 
@@ -298,12 +342,10 @@
             const filterBtns = document.querySelectorAll('.filter-btn');
             
             filterBtns.forEach(btn => {
-                // Prevent duplicate event listeners by replacing the node
                 const newBtn = btn.cloneNode(true);
                 btn.parentNode.replaceChild(newBtn, btn);
                 
                 newBtn.addEventListener('click', () => {
-                    // Update Active Button Style
                     document.querySelectorAll('.filter-btn').forEach(b => {
                         b.classList.remove('bg-blood', 'text-white', 'active');
                         b.classList.add('bg-white', 'text-gray-700');
@@ -311,12 +353,10 @@
                     newBtn.classList.remove('bg-white', 'text-gray-700');
                     newBtn.classList.add('bg-blood', 'text-white', 'active');
 
-                    // Filter Cards
                     const group = newBtn.getAttribute('data-group');
                     const donorCards = document.querySelectorAll('.donor-card');
                     
                     donorCards.forEach(card => {
-                        // Checking "all" (lowercase based on your existing HTML button) or exact match
                         if (group === 'all' || card.getAttribute('data-group') === group) {
                             card.style.display = 'flex';
                         } else {
@@ -326,6 +366,39 @@
                 });
             });
         }
+
+        // ==========================================
+        // Live Emergency Ticker Logic
+        // ==========================================
+        const tickerContainer = document.getElementById('emergencyTickerContainer');
+        const tickerTrack = document.getElementById('tickerTrack');
+
+        db.ref('blood_requests').on('value', (snapshot) => {
+            if (!snapshot.exists()) {
+                tickerContainer.classList.add('hidden');
+                return;
+            }
+
+            tickerContainer.classList.remove('hidden');
+            tickerTrack.innerHTML = ''; 
+
+            let requestsArray = [];
+            snapshot.forEach((childSnapshot) => {
+                requestsArray.push(childSnapshot.val());
+            });
+            requestsArray.reverse();
+
+            let tickerHTML = '';
+            requestsArray.forEach((req) => {
+                tickerHTML += `
+                    <a href="blood-requests.html" class="inline-block mx-4 bg-red-50 text-red-700 border border-red-100 px-4 py-1.5 rounded-full font-semibold hover:bg-red-600 hover:text-white transition duration-300">
+                        🩸 ${req.bloodGroup} রক্ত প্রয়োজন — রোগী: ${req.patientName} 🏥 স্থান: ${req.hospitalName} (ক্লিক করুন)
+                    </a>
+                `;
+            });
+            
+            tickerTrack.innerHTML = tickerHTML;
+        });
     </script>
 </body>
 </html>
